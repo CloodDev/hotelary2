@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,9 +19,11 @@ public class MainActivity extends AppCompatActivity {
     private int currentImageIndex = 0;
     private int[][] imageResources = {
         {R.drawable.barcelona1, R.drawable.barcelona2, R.drawable.barcelona3, R.drawable.image1},
-        {R.drawable.londyn1, R.drawable.londyn2, R.drawable.londyn3, R.drawable.image2},
-        {R.drawable.paris1, R.drawable.paris2, R.drawable.paris3, R.drawable.image3}
+        {R.drawable.londyn1, R.drawable.londyn2, R.drawable.londyn3, R.drawable.image3},
+        {R.drawable.paris1, R.drawable.paris2, R.drawable.paris3, R.drawable.image2}
     };
+
+    public int selectedHotel = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Assume you have a Button and EditText in your activity_main.xml
         Button submitButton = findViewById(R.id.btnSubmit);
-
         // New elements from activity_main.xml
         final EditText dateFromField = findViewById(R.id.dateFrom);
         final EditText dateToField = findViewById(R.id.dateTo);
@@ -40,17 +42,27 @@ public class MainActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String dateFrom = dateFromField.getText().toString();
-                String dateTo = dateToField.getText().toString();
-                String adultsCount = adultsCountField.getText().toString();
-                String kidsCount = kidsCountField.getText().toString();
+            String dateFrom = dateFromField.getText().toString();
+            String dateTo = dateToField.getText().toString();
+            String adultsCount = adultsCountField.getText().toString();
+            String kidsCount = kidsCountField.getText().toString();
 
-                String formattedData = String.format(
-                    "From: %s\nTo: %s\nAdults: %s\nKids: %s",
-                    dateFrom, dateTo, adultsCount, kidsCount
-                );
+            // Get hotel name based on the current city
+            String[] cityNames = {"Barcelona", "London", "Paris"};
+            String cityName = cityNames[currentImageIndex];
+            
+            // Add hotel number if selected
+            String hotelInfo = cityName;
+            if (selectedHotel > 0) {
+                hotelInfo += " - Hotel " + selectedHotel;
+            }
 
-                showAlert(formattedData);
+            String formattedData = String.format(
+                "Hotel: %s\nFrom: %s\nTo: %s\nAdults: %s\nKids: %s",
+                hotelInfo, dateFrom, dateTo, adultsCount, kidsCount
+            );
+
+            showAlert(formattedData);
             }
         });
 
@@ -62,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
         
         Button prevButton = findViewById(R.id.btnPrevImage);
         Button nextButton = findViewById(R.id.btnNextImage);
+
+        ImageButton hotel1 = findViewById(R.id.hotelImage1);
+        ImageButton hotel2 = findViewById(R.id.hotelImage2);
+        ImageButton hotel3 = findViewById(R.id.hotelImage3);
 
         prevButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +92,36 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 currentImageIndex = (currentImageIndex + 1) % imageResources.length;
                 updateImages(imageView, hotelImage1, hotelImage2, hotelImage3);
+            }
+        });
+
+        hotel1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedHotel = 1;
+                hotel1.setBackgroundResource(R.drawable.button_selected);
+                hotel2.setBackgroundResource(R.drawable.button_normal);
+                hotel3.setBackgroundResource(R.drawable.button_normal);
+            }
+        });
+
+        hotel2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedHotel = 2;
+                hotel1.setBackgroundResource(R.drawable.button_normal);
+                hotel2.setBackgroundResource(R.drawable.button_selected);
+                hotel3.setBackgroundResource(R.drawable.button_normal);
+            }
+        });
+
+        hotel3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedHotel = 3;
+                hotel1.setBackgroundResource(R.drawable.button_normal);
+                hotel2.setBackgroundResource(R.drawable.button_normal);
+                hotel3.setBackgroundResource(R.drawable.button_selected);
             }
         });
 

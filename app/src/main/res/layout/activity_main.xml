@@ -103,33 +103,61 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
-
-                            <ImageView
-                                android:id="@+id/hotelImage1"
+                            <FrameLayout
+                                android:id="@+id/hotelContainer1"
                                 android:layout_width="0dp"
-                                android:layout_height="80dp"
-                                android:layout_margin="4dp"
+                                android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:scaleType="centerCrop"
-                                app:srcCompat="@drawable/barcelona1" />
+                                android:layout_margin="4dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?attr/selectableItemBackground">
+                                
+                                <ImageButton
+                                    android:id="@+id/hotelImage1"     
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+                                    android:scaleType="centerCrop"
+                                    app:srcCompat="@drawable/image1" />
+                            </FrameLayout>
 
-                            <ImageView
-                                android:id="@+id/hotelImage2"
+                            <FrameLayout
+                                android:id="@+id/hotelContainer2"
                                 android:layout_width="0dp"
-                                android:layout_height="80dp"
-                                android:layout_margin="4dp"
+                                android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:scaleType="centerCrop"
-                                app:srcCompat="@drawable/barcelona2" />
+                                android:layout_margin="4dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?attr/selectableItemBackground">
+                                
+                                <ImageButton
+                                    android:id="@+id/hotelImage2"     
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+                                    android:scaleType="centerCrop"
+                                    app:srcCompat="@drawable/image2" />
+                            </FrameLayout>
 
-                            <ImageView
-                                android:id="@+id/hotelImage3"
+                            <FrameLayout
+                                android:id="@+id/hotelContainer3"
                                 android:layout_width="0dp"
-                                android:layout_height="80dp"
-                                android:layout_margin="4dp"
+                                android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:scaleType="centerCrop"
-                                app:srcCompat="@drawable/barcelona3" />
+                                android:layout_margin="4dp"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:foreground="?attr/selectableItemBackground">
+                                
+                                <ImageButton
+                                    android:id="@+id/hotelImage3"     
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+                                    android:scaleType="centerCrop"
+                                    app:srcCompat="@drawable/image3" />
+
+
+                            </FrameLayout>
                         </LinearLayout>
 
                         <TextView
